@@ -1,0 +1,61 @@
+pipeline {
+
+  agent { label 'master' }
+  
+  environment {
+      PROJECT_NAME = "Test-Project"
+      OWNER_NAME   = "USER_1"
+  }
+
+  stages {
+    stage('BUILD') {
+        steps {
+            echo "this is stage number 1 - BUILD"
+            sh('cat 11.a')
+            sh('sleep 3')
+            echo " Project name ${PROJECT_NAME}"
+        }
+    }
+    stage('TEST') {
+        steps {
+            echo "this is stage number 2 - Python"
+            sh '''
+              pwd
+              ls -la
+              sleep 3
+            '''
+        }
+    }
+     stage('4Dima') {
+        steps {
+            echo "this is stage 4Dima"
+            sh '''
+              echo "shalom" >> 1.a
+              ls -la
+              sleep 3
+            '''
+        }
+    }
+    stage('DEPLOY') {
+        steps {
+            echo "this is stage number 2 - Python"
+            sh '''
+              sleep 3
+              cat 1.a
+            '''
+            
+        }
+    }
+  }
+  post {
+        success {
+            echo 'Pipeline completed successfully.'
+        }
+        failure {
+            echo 'Pipeline failed.'
+        }
+        always {
+            echo 'Post Always part.'
+        }
+    }
+}
