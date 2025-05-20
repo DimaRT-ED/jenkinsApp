@@ -11,7 +11,7 @@ pipeline {
     stage('BUILD') {
         steps {
             echo "this is stage number 1 - BUILD"
-            sh('cat 11.a')
+            sh('cat 1.a')
             sh('sleep 3')
             echo " Project name ${PROJECT_NAME}"
         }
