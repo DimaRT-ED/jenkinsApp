@@ -14,7 +14,7 @@ pipeline {
     stage('1-Build') {
       steps {
         echo "-------  Start of Stage Build  -------"
-        sh('echo ${STATEMENT}')
+        sh('echo ${STATEMENT} AAAA')
         echo "-------  Eof Stage Build  —------"
       }
     }
