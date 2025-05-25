@@ -22,7 +22,12 @@ pipeline {
       steps {
         echo "-------  Start of Stage Test  -------"
 	echo "${params.Greeting} World!"
-        sh 'python3 script.py --name=DAG'
+        sh '''
+           python3 --version
+           python3 script.py --name=DAG
+           pwd
+           ls -la
+        '''
         echo "-------  Eof Stage Test  —------"
       }
     }
