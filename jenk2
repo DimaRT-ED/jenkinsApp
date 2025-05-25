@@ -21,7 +21,8 @@ pipeline {
     stage('2-Test') {
       steps {
         echo "-------  Start of Stage Test  -------"
-		    echo "${params.Greeting} World!"
+	echo "${params.Greeting} World!"
+        sh 'python3 script.py --name=DAG'
         echo "-------  Eof Stage Test  —------"
       }
     }
