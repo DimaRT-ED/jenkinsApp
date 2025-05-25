@@ -1,0 +1,54 @@
+pipeline {
+  agent {
+    label 'linux'
+  }
+  environment {
+    PROJECT_NAME = "Test-Project"
+    OWNER_NAME   = "USER_1"
+  }
+  parameters {
+    string(name: 'STATEMENT', defaultValue: 'hello; ls /', description: 'What should I say?')
+    string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
+  }
+  stages {
+    stage('1-Build') {
+      steps {
+        echo "-------  Start of Stage Build  -------"
+        sh('echo ${STATEMENT}')
+        echo "-------  Eof Stage Build  —------"
+      }
+    }
+    stage('2-Test') {
+      steps {
+        echo "-------  Start of Stage Test  -------"
+		    echo "${params.Greeting} World!"
+        echo "-------  Eof Stage Test  —------"
+      }
+    }
+    stage('3-Deploy') {
+      steps {
+        echo "-------  Start of Stage Deploy  -------"
+        echo "Hello from ${PROJECT_NAME}"
+        echo "Owner is ${OWNER_NAME}"
+        echo "-------  Eof Stage Deploy  —------"
+      }
+    }
+    stage('4-Finish') {
+      steps {
+        echo "CONGRATULACION!"
+      }
+    }
+  }
+  post {
+    always {
+      echo "  ---  always  ---"
+    }
+    success {
+      echo "  ---  success  ---"
+    }
+    failure {
+      mail to: realtimedima@gmail.com, subject: 'The Pipeline ${PROJECT_NAME} failed :('
+    }
+  }
+}
+
